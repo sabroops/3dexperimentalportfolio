@@ -24,11 +24,16 @@ camera.position.setZ(30); // move along z axis; better persp. w shapes
 
 renderer.render(scene, camera); // render
 
-const geometry = new THREE.TorusGeometry(10, 3, 16,100);
-const material = new THREE.MeshStandardMaterial({color:0xFF69B4});
-const torus = new THREE.Mesh(geometry, material);
+const geometry = new THREE.TorusGeometry(15, 2, 16,100);
+const material = new THREE.MeshStandardMaterial({color:0xffffff, wireframe: true}); //35b5ac
 
-scene.add(torus);
+const torus = new THREE.Mesh(geometry, material);
+const material2 = new THREE.MeshStandardMaterial({color:0x35b5ac, wireframe:true}); //35b5ac
+
+const geo2 = new THREE.TorusGeometry(50, 1, 16, 100);
+const torus2 = new THREE.Mesh(geo2, material2);
+
+scene.add(torus, torus2);
 
 const pointLight = new THREE.PointLight(0xffffff)
 pointLight.position.set(20,20,20);
@@ -38,9 +43,9 @@ ambientLight.position.set(5,5,5);
 
 scene.add(pointLight, ambientLight);
 
-const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper);
+// const lightHelper = new THREE.PointLightHelper(pointLight);
+// const gridHelper = new THREE.GridHelper(200, 50);
+// scene.add(lightHelper, gridHelper);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -56,11 +61,61 @@ function addStar(){
 
 Array(200).fill(0).forEach(addStar);
 
+const jadeTexture = new THREE.TextureLoader().load('src/jade.jpg');
+scene.background = jadeTexture;
+
+const catburgTexture = new THREE.TextureLoader().load('src/catburg.jpeg');
+
+const catburg = new THREE.Mesh(
+  new THREE.BoxGeometry(5,5,5),
+  new THREE.MeshBasicMaterial({map: catburgTexture})
+);
+
+catburg.position.set(10, 0, 0);
+
+scene.add(catburg);
+
+const neptuneTexture = new THREE.TextureLoader().load('src/neptunemap.jpeg');
+
+const neptune = new THREE.Mesh(
+  new THREE.SphereGeometry(3, 32, 32),
+  new THREE.MeshStandardMaterial( {
+    map: neptuneTexture,
+  })
+);
+
+neptune.position.z = 30; // can use equals to assign
+neptune.position.setX(-10); // or use setter function!
+
+scene.add(neptune);
+
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top; // dim of viewport
+
+  neptune.rotation.x += .05;
+  neptune.rotation.y += .075;
+  neptune.rotation.z += .05;
+
+  catburg.rotation.y += .02;
+  catburg.rotation.z += .01;
+
+  camera.position.z = t * -.01;
+  camera.position.x = t * -.0002;
+  camera.position.y = t * -.0002;
+
+}
+
+document.body.onscroll = moveCamera
+
 function animate() {
   requestAnimationFrame( animate);
-  torus.rotation.x += .01;
-  torus.rotation.y += .005;
-  torus.rotation.z += .01;
+  torus.rotation.x += .002;
+  torus.rotation.y += .0007;
+  torus.rotation.z += .002;
+
+  torus2.rotation.x += -.001;
+  torus2.rotation.y += .0005;
+  torus2.rotation.z += .001;
 
   controls.update();
 
