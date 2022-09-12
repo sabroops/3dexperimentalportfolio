@@ -5,6 +5,8 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // import { ArrayCamera } from 'three';
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
 // 1. Scene
 const scene = new THREE.Scene();
 
@@ -42,6 +44,8 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 ambientLight.position.set(5,5,5);
 
 scene.add(pointLight, ambientLight);
+
+
 
 // const lightHelper = new THREE.PointLightHelper(pointLight);
 // const gridHelper = new THREE.GridHelper(200, 50);
@@ -89,12 +93,35 @@ neptune.position.setX(-10); // or use setter function!
 
 scene.add(neptune);
 
+let bmo: THREE.Group | THREE.Object3D<THREE.Event>;
+const loader = new GLTFLoader();
+loader.load(
+    'src/bmo/scene.gltf',
+    ( gltf ) => {
+        // called when the resource is loaded
+        bmo = gltf.scene;
+        bmo.rotation.y = Math.PI;
+        bmo.position.x = -150;
+        bmo.position.y = -80;
+        bmo.position.z = -200;
+        scene.add( bmo );
+    },
+    ( xhr ) => {
+        // called while loading is progressing
+        console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
+    },
+    ( error ) => {
+        // called when loading has errors
+        console.error( 'An error happened', error );
+    },
+);
+
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top; // dim of viewport
 
-  neptune.rotation.x += .05;
-  neptune.rotation.y += .075;
-  neptune.rotation.z += .05;
+  neptune.rotation.x += .005;
+  neptune.rotation.y += .0075;
+  neptune.rotation.z += .005;
 
   catburg.rotation.y += .02;
   catburg.rotation.z += .01;
@@ -103,7 +130,20 @@ function moveCamera() {
   camera.position.x = t * -.0002;
   camera.position.y = t * -.0002;
 
+
 }
+
+// var tlLogo = new TimelineMax({paused: true});
+// tlLogo.to('#logo>path',1,{stroke:'#ff6600'});
+// tlLogo.to('#logo g path',1,{fill:'#ff6600'},'-=1');
+
+
+// document.addEventListener("scroll", onScroll);
+
+// function onScroll() {
+//   var scrollY = window.pageYOffset || 0;
+//   tlLogo.tweenTo(scrollY/1000);
+// }
 
 document.body.onscroll = moveCamera
 
@@ -116,6 +156,10 @@ function animate() {
   torus2.rotation.x += -.001;
   torus2.rotation.y += .0005;
   torus2.rotation.z += .001;
+
+  bmo.rotation.x += .001;
+  bmo.rotation.y += .0008;
+  bmo.rotation.z += .001;
 
   controls.update();
 
