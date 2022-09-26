@@ -1,0 +1,11 @@
+Model Information:
+* title:	COOKIECAT
+* source:	https://sketchfab.com/3d-models/cookiecat-af6c1fa39c7a48d8b2e11de3434e16d1
+* author:	Leo Isidro (https://sketchfab.com/leo.isidro3)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "COOKIECAT" (https://sketchfab.com/3d-models/cookiecat-af6c1fa39c7a48d8b2e11de3434e16d1) by Leo Isidro (https://sketchfab.com/leo.isidro3) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

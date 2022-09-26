@@ -15,6 +15,7 @@
     "vite": "^3.0.7"
   },
   "dependencies": {
+    "skrollr": "^0.6.26",
     "three": "^0.144.0",
     "three-collada-loader": "^0.0.1"
   }

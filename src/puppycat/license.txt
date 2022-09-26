@@ -1,0 +1,11 @@
+Model Information:
+* title:	Puppycat
+* source:	https://sketchfab.com/3d-models/puppycat-f7901fbc53a64fe7b24a97cf669101df
+* author:	Ino Esteves (https://sketchfab.com/imesteves)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Puppycat" (https://sketchfab.com/3d-models/puppycat-f7901fbc53a64fe7b24a97cf669101df) by Ino Esteves (https://sketchfab.com/imesteves) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

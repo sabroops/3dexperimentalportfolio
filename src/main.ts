@@ -6,6 +6,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // import { ArrayCamera } from 'three';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { FloatType } from 'three';
 
 // 1. Scene
 const scene = new THREE.Scene();
@@ -30,7 +31,7 @@ const geometry = new THREE.TorusGeometry(15, 2, 16,100);
 const material = new THREE.MeshStandardMaterial({color:0xffffff, wireframe: true}); //35b5ac
 
 const torus = new THREE.Mesh(geometry, material);
-const material2 = new THREE.MeshStandardMaterial({color:0x35b5ac, wireframe:true}); //35b5ac
+const material2 = new THREE.MeshStandardMaterial({color:0x81aed9, wireframe:true}); //35b5ac
 
 const geo2 = new THREE.TorusGeometry(50, 1, 16, 100);
 const torus2 = new THREE.Mesh(geo2, material2);
@@ -65,33 +66,34 @@ function addStar(){
 
 Array(200).fill(0).forEach(addStar);
 
-const jadeTexture = new THREE.TextureLoader().load('src/jade.jpg');
+// const jadeTexture = new THREE.TextureLoader().load('src/jade.jpg'); //#81aed9
+const jadeTexture = new THREE.Color(0x81aed9); //#81aed9
 scene.background = jadeTexture;
 
-const catburgTexture = new THREE.TextureLoader().load('src/catburg.jpeg');
+// const catburgTexture = new THREE.TextureLoader().load('src/catburg.jpeg');
 
-const catburg = new THREE.Mesh(
-  new THREE.BoxGeometry(5,5,5),
-  new THREE.MeshBasicMaterial({map: catburgTexture})
-);
+// const catburg = new THREE.Mesh(
+//   new THREE.BoxGeometry(5,5,5),
+//   new THREE.MeshBasicMaterial({map: catburgTexture})
+// );
 
-catburg.position.set(10, 0, 0);
+// catburg.position.set(10, 0, 0);
 
-scene.add(catburg);
+// scene.add(catburg);
 
-const neptuneTexture = new THREE.TextureLoader().load('src/neptunemap.jpeg');
+// const neptuneTexture = new THREE.TextureLoader().load('src/neptunemap.jpeg');
 
-const neptune = new THREE.Mesh(
-  new THREE.SphereGeometry(3, 32, 32),
-  new THREE.MeshStandardMaterial( {
-    map: neptuneTexture,
-  })
-);
+// const neptune = new THREE.Mesh(
+//   new THREE.SphereGeometry(3, 32, 32),
+//   new THREE.MeshStandardMaterial( {
+//     map: neptuneTexture,
+//   })
+// );
 
-neptune.position.z = 30; // can use equals to assign
-neptune.position.setX(-10); // or use setter function!
+// neptune.position.z = 30; // can use equals to assign
+// neptune.position.setX(-10); // or use setter function!
 
-scene.add(neptune);
+// scene.add(neptune);
 
 let bmo: THREE.Group | THREE.Object3D<THREE.Event>;
 const loader = new GLTFLoader();
@@ -101,10 +103,54 @@ loader.load(
         // called when the resource is loaded
         bmo = gltf.scene;
         bmo.rotation.y = Math.PI;
-        bmo.position.x = -150;
-        bmo.position.y = -80;
-        bmo.position.z = -200;
+        bmo.position.x = -10;
+        bmo.position.y = -10;
+        bmo.position.z = -30;
         scene.add( bmo );
+    },
+    ( xhr ) => {
+        // called while loading is progressing
+        console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
+    },
+    ( error ) => {
+        // called when loading has errors
+        console.error( 'An error happened', error );
+    },
+);
+
+let cookiecat: THREE.Group | THREE.Object3D<THREE.Event>;
+const loader2 = new GLTFLoader();
+loader2.load(
+    'src/cookiecat/scene.gltf',
+    ( gltf ) => {
+        // called when the resource is loaded
+        cookiecat = gltf.scene;
+        cookiecat.scale.set(.01,.01,.01);
+        cookiecat.rotation.y = Math.PI;
+        cookiecat.position.set(9,5,5);
+        scene.add( cookiecat );
+    },
+    ( xhr ) => {
+        // called while loading is progressing
+        console.log( `${( xhr.loaded / xhr.total * 100 )}% loaded` );
+    },
+    ( error ) => {
+        // called when loading has errors
+        console.error( 'An error happened', error );
+    },
+);
+
+let puppycat: THREE.Group | THREE.Object3D<THREE.Event>;
+const loader3 = new GLTFLoader();
+loader3.load(
+    'src/puppycat/scene.gltf',
+    ( gltf ) => {
+        // called when the resource is loaded
+        puppycat = gltf.scene;
+        puppycat.scale.set(.011,.011,.011);
+        puppycat.rotation.set(-Math.PI/6,0,0);
+        puppycat.position.set(0,-2,42);
+        scene.add( puppycat );
     },
     ( xhr ) => {
         // called while loading is progressing
@@ -119,12 +165,12 @@ loader.load(
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top; // dim of viewport
 
-  neptune.rotation.x += .005;
-  neptune.rotation.y += .0075;
-  neptune.rotation.z += .005;
+  // neptune.rotation.x += .005;
+  // neptune.rotation.y += .0075;
+  // neptune.rotation.z += .005;
 
-  catburg.rotation.y += .02;
-  catburg.rotation.z += .01;
+  cookiecat.rotation.y += .02;
+  cookiecat.rotation.z += .01;
 
   camera.position.z = t * -.01;
   camera.position.x = t * -.0002;
@@ -157,9 +203,9 @@ function animate() {
   torus2.rotation.y += .0005;
   torus2.rotation.z += .001;
 
-  bmo.rotation.x += .001;
-  bmo.rotation.y += .0008;
-  bmo.rotation.z += .001;
+  bmo.rotation.x += .0005;
+  bmo.rotation.y += .00004;
+  bmo.rotation.z += .000025;
 
   controls.update();
 
