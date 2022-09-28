@@ -6,7 +6,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // import { ArrayCamera } from 'three';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { FloatType } from 'three';
+// import { FloatType } from 'three';
 
 // 1. Scene
 const scene = new THREE.Scene();
