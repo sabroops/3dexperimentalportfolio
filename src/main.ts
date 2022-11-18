@@ -195,9 +195,9 @@ document.body.onscroll = moveCamera
 
 function animate() {
   requestAnimationFrame( animate);
-  torus.rotation.x += .002;
+  torus.rotation.x += .0002;
   torus.rotation.y += .0007;
-  torus.rotation.z += .002;
+  torus.rotation.z += .0002;
 
   torus2.rotation.x += -.001;
   torus2.rotation.y += .0005;

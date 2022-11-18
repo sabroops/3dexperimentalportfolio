@@ -29,7 +29,7 @@ main {
 }
 
 h1, h2, h3, blockquote {
-  font-family: elevon, sans-serif;
+  font-family: 'Times New Roman', Times, serif, brandon-grotesque, sans-serif;
   font-weight: 700;
   font-style: normal;
 }
