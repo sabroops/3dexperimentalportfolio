@@ -110,7 +110,9 @@
     <script type="module" src="/src/main.ts"></script>
     <script type="text/javascript" src="/node_modules/skrollr/src/skrollr.js"></script>
     <script type="text/javascript">
-    var s = skrollr.init();
+    $(document).ready(function () {
+        var s = skrollr.init();
+    });
     </script>
   </body>
 </html>
