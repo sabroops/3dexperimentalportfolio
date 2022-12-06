@@ -9,7 +9,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 // import { FloatType } from 'three';
 
 // @ts-ignore
-// import {skrollr} from 'skrollr'; some day.
+// import {skrollr} from 'skrollr'; //some day.
 
 // skrollr.init();
 
@@ -108,7 +108,7 @@ loader.load(
     ( gltf ) => {
         // called when the resource is loaded
         bmo = gltf.scene;
-        bmo.rotation.y = Math.PI;
+        if(bmo) bmo.rotation.y = Math.PI;
         bmo.position.x = -10;
         bmo.position.y = -10;
         bmo.position.z = -30;
@@ -132,7 +132,7 @@ loader2.load(
         // called when the resource is loaded
         cookiecat = gltf.scene;
         cookiecat.scale.set(.01,.01,.01);
-        cookiecat.rotation.y = Math.PI;
+        if (cookiecat) cookiecat.rotation.y = Math.PI;
         cookiecat.position.set(9,5,5);
         scene.add( cookiecat );
     },
@@ -154,7 +154,7 @@ loader3.load(
         // called when the resource is loaded
         puppycat = gltf.scene;
         puppycat.scale.set(.011,.011,.011);
-        puppycat.rotation.set(-Math.PI/6,0,0);
+        if(puppycat) puppycat.rotation.set(-Math.PI/6,0,0);
         puppycat.position.set(0,-2,42);
         scene.add( puppycat );
     },
@@ -175,8 +175,8 @@ function moveCamera() {
   // neptune.rotation.y += .0075;
   // neptune.rotation.z += .005;
 
-  cookiecat.rotation.y += .02;
-  cookiecat.rotation.z += .01;
+  if (cookiecat) cookiecat.rotation.y += .02;
+  if (cookiecat) cookiecat.rotation.z += .01;
 
   camera.position.z = t * -.01;
   camera.position.x = t * -.0002;
@@ -201,17 +201,17 @@ document.body.onscroll = moveCamera
 
 function animate() {
   requestAnimationFrame( animate);
-  torus.rotation.x += .0002;
+  if (torus) {torus.rotation.x += .0002;
   torus.rotation.y += .0007;
-  torus.rotation.z += .0002;
+  torus.rotation.z += .0002;}
 
-  torus2.rotation.x += -.001;
+  if (torus2) {torus2.rotation.x += -.001;
   torus2.rotation.y += .0005;
-  torus2.rotation.z += .001;
+  torus2.rotation.z += .001;}
 
-  bmo.rotation.x += .0005;
+  if (bmo) {bmo.rotation.x += .0005;
   bmo.rotation.y += .00004;
-  bmo.rotation.z += .000025;
+  bmo.rotation.z += .000025;}
 
   controls.update();
 
