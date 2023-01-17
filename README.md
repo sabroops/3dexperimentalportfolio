@@ -1,5 +1,3 @@
-# sapoopy
+## Experimental 3D Portfolio
 
-## hi 
-
-my portfolio 
+Trying to revamp portfolio as a side project. I wanted to learn more about WebGL and Typescript. Currently trying to deploy onto git pages...
